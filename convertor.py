@@ -13,14 +13,14 @@ print('opening access....')
 
 cnnstr = (
     r"Driver = (Microsoft Access Driver (*.mdb, *.accdb))",
-    r"DBQ = /home/king/Desktop/new.accdb"
+    r"DBQ = /home/king/Desktop/new.mdb"
 )
 
-cnnurl = f"access+pyodbc:///?odbc_connect={urllib.parse.quote_plus(cnnstr)}"
+cnnurl = f"access+pyodbc:///?odbc_connect={urllib.parse.quote(str(cnnstr))}"
 acc_engine = create_engine(cnnurl)
 
 print('writing to access... (new table)')
 
-df.to_sql('COVID_IMPORT', acc_engine)
+df.to_sql('new_access', con=acc_engine)
 
 print('write comlpate')
